@@ -1,22 +1,39 @@
 ﻿// Задать два массива, перемножить их между собой 
 //и вывести в новый массив
 
-Console.Write("Введите количество строк массивов: ");
-int rows = int.Parse(Console.ReadLine()!);
-Console.Write("Введите количество столбцов массивов: ");
-int columns = int.Parse(Console.ReadLine()!);
+Console.Write("Введите количество строк массива 1: ");
+int rows1 = int.Parse(Console.ReadLine()!);
+Console.Write("Введите количество столбцов массива 1: ");
+int columns1 = int.Parse(Console.ReadLine()!);
 Console.WriteLine("Массив №1: ");
-int[,] array1 = GetArray(rows, columns, 0, 10);
+int[,] array1 = GetArray(rows1, columns1, 0, 10);
 PrintArray(array1);
 MainDiagPosSum(array1);
+
+Console.Write("Введите количество строк массива 2: ");
+int rows2 = int.Parse(Console.ReadLine()!);
+Console.Write("Введите количество столбцов массива 2: ");
+int columns2 = int.Parse(Console.ReadLine()!);
 Console.WriteLine("Массив №2: ");
-int[,] array2 = GetArray(rows, columns, 0, 10);
+int[,] array2 = GetArray(rows2, columns2, 0, 10);
 PrintArray(array2);
 MainDiagPosSum(array2);
+
 Console.WriteLine("Произведение массивов: ");
-int[,] arrayProd = ProductBothArrays(array1, array2);
-PrintArray(arrayProd);
-MainDiagPosSum(arrayProd);
+if (array1.GetLength(0) == array2.GetLength(0) &&
+array1.GetLength(1) == array2.GetLength(1))
+{
+    int[,] arrayProd = ProductBothArraysDifferentSize(array1, array2);
+    PrintArray(arrayProd);
+    MainDiagPosSum(arrayProd);
+}
+else
+{
+    Console.WriteLine("Массивы разной размерности!");
+}
+
+
+
 
 int[,] GetArray(int m, int n, int minValue, int maxValue)
 {
@@ -58,7 +75,7 @@ void PrintArray(int[,] inArray)
     }
 }
 
-int[,] ProductBothArrays(int[,] arr1, int[,] arr2)
+int[,] ProductBothArraysDifferentSize(int[,] arr1, int[,] arr2)
 {
     int[,] productArr = new int[arr1.GetLength(0), arr1.GetLength(1)];
     for (int i = 0; i < arr1.GetLength(0); i++)
